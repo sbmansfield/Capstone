@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.params=audioClip
+comment0.target=void\ setAudioClip(javax.sound.sampled.Clip)
+comment1.params=labelRecordTime\ slider
+comment1.target=PlayingTimer(javax.swing.JLabel,\ javax.swing.JSlider)
+comment2.params=
+comment2.target=void\ run()
+comment3.params=
+comment3.target=void\ reset()
+comment3.text=\r\n\ Reset\ counting\ to\ "00\:00\:00"\r\n
+comment4.params=
+comment4.target=void\ pauseTimer()
+comment5.params=
+comment5.target=void\ resumeTimer()
+comment6.params=
+comment6.target=java.lang.String\ toTimeString()
+comment6.text=\r\n\ Generate\ a\ String\ for\ time\ counter\ in\ the\ format\ of\ "HH\:mm\:ss"\r\n\ @return\ the\ time\ counter\r\n
+numComments=7

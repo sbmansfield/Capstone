@@ -1,0 +1,24 @@
+#BlueJ class context
+comment0.params=audioFilePath
+comment0.target=void\ load(java.lang.String)
+comment0.text=\r\n\ Load\ audio\ file\ before\ playing\ back\r\n\ \r\n\ @param\ audioFilePath\r\n\ \ \ \ \ \ \ \ \ \ \ \ Path\ of\ the\ audio\ file.\r\n\ @throws\ IOException\r\n\ @throws\ UnsupportedAudioFileException\r\n\ @throws\ LineUnavailableException\r\n
+comment1.params=
+comment1.target=long\ getClipSecondLength()
+comment2.params=
+comment2.target=java.lang.String\ getClipLengthString()
+comment3.params=
+comment3.target=void\ play()
+comment3.text=\r\n\ Play\ a\ given\ audio\ file.\r\n\ \r\n\ @throws\ IOException\r\n\ @throws\ UnsupportedAudioFileException\r\n\ @throws\ LineUnavailableException\r\n
+comment4.params=
+comment4.target=void\ stop()
+comment4.text=\r\n\ Stop\ playing\ back.\r\n
+comment5.params=
+comment5.target=void\ pause()
+comment6.params=
+comment6.target=void\ resume()
+comment7.params=event
+comment7.target=void\ update(javax.sound.sampled.LineEvent)
+comment7.text=\r\n\ Listens\ to\ the\ audio\ line\ events\ to\ know\ when\ the\ playback\ completes.\r\n
+comment8.params=
+comment8.target=javax.sound.sampled.Clip\ getAudioClip()
+numComments=9
