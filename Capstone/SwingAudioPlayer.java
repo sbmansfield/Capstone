@@ -1,3 +1,5 @@
+import java.util.Random;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -30,282 +32,304 @@ import javax.swing.filechooser.FileFilter;
  *
  */
 public class SwingAudioPlayer extends JFrame implements ActionListener {
-	private AudioPlayer player = new AudioPlayer();
-	private Thread playbackThread;
-	private PlayingTimer timer;
+    private AudioPlayer player = new AudioPlayer();
+    private Thread playbackThread;
+    private PlayingTimer timer;
 
-	private boolean isPlaying = false;
-	private boolean isPause = false;
-	
-	private String audioFilePath;
-	private String lastOpenPath;
-	
-	private JLabel labelFileName = new JLabel("Playing File:");
-	private JLabel labelTimeCounter = new JLabel("00:00:00");
-	private JLabel labelDuration = new JLabel("00:00:00");
-	
-	private JButton buttonOpen = new JButton("Open");
-	private JButton buttonPlay = new JButton("Play");
-	private JButton buttonPause = new JButton("Pause");
-	
-	private JSlider sliderTime = new JSlider();
-	
-	// Icons used for buttons
-// 	private ImageIcon iconOpen = new ImageIcon(getClass().getResource(
-// 			"/net/codejava/audio/images/Open.png"));
-// 	private ImageIcon iconPlay = new ImageIcon(getClass().getResource(
-// 			"/net/codejava/audio/images/Play.gif"));
-// 	private ImageIcon iconStop = new ImageIcon(getClass().getResource(
-// 			"/net/codejava/audio/images/Stop.gif"));
-// 	private ImageIcon iconPause = new ImageIcon(getClass().getResource(
-// 			"/net/codejava/audio/images/Pause.png"));
-	
-	
-	public SwingAudioPlayer() {
-		super("Java Audio Player");
-		setLayout(new GridBagLayout());
-		GridBagConstraints constraints = new GridBagConstraints();
-		constraints.insets = new Insets(5, 5, 5, 5);
-		constraints.anchor = GridBagConstraints.WEST;
-		
-		buttonOpen.setFont(new Font("Sans", Font.BOLD, 14));
-		//buttonOpen.setIcon(iconOpen);
-		
-		buttonPlay.setFont(new Font("Sans", Font.BOLD, 14));
-		//buttonPlay.setIcon(iconPlay);
-		buttonPlay.setEnabled(false);
-		
-		buttonPause.setFont(new Font("Sans", Font.BOLD, 14));
-		//buttonPause.setIcon(iconPause);
-		buttonPause.setEnabled(false);
-		
-		labelTimeCounter.setFont(new Font("Sans", Font.BOLD, 12));
-		labelDuration.setFont(new Font("Sans", Font.BOLD, 12));
-		
-		sliderTime.setPreferredSize(new Dimension(400, 20));
-		sliderTime.setEnabled(false);
-		sliderTime.setValue(0);
+    private boolean isPlaying = false;
+    private boolean isPause = false;
+    
+    private String audioFilePath;
+    private String lastOpenPath;
+    
+    //private JPanel panel;
+    
+    private JLabel labelFileName = new JLabel("Playing File:");
+    private JLabel labelTimeCounter = new JLabel("00:00:00");
+    private JLabel labelDuration = new JLabel("00:00:00");
+    
+    private JButton buttonOpen = new JButton("Open");
+    private JButton buttonPlay = new JButton("Play");
+    private JButton buttonPause = new JButton("Pause");
+    
+    private JSlider sliderTime = new JSlider();
 
-		constraints.gridx = 0;
-		constraints.gridy = 0;
-		constraints.gridwidth = 3;
-		add(labelFileName, constraints);
-		
-		constraints.anchor = GridBagConstraints.CENTER;
-		constraints.gridy = 1;
-		constraints.gridwidth = 1;
-		add(labelTimeCounter, constraints);
-		
-		constraints.gridx = 1;
-		add(sliderTime, constraints);
-		
-		constraints.gridx = 2;
-		add(labelDuration, constraints);
-		
-		JPanel panelButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 5));
-		panelButtons.add(buttonOpen);
-		panelButtons.add(buttonPlay);
-		panelButtons.add(buttonPause);
-		
-		constraints.gridwidth = 3;
-		constraints.gridx = 0;
-		constraints.gridy = 2;
-		add(panelButtons, constraints);
-		
-		buttonOpen.addActionListener(this);
-		buttonPlay.addActionListener(this);
-		buttonPause.addActionListener(this);
-		
-		pack();
-		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
-	}
+    public SwingAudioPlayer() 
+    {
+        super("Java Music Player");
+        setLayout(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.insets = new Insets(5, 5, 5, 5);
+        constraints.anchor = GridBagConstraints.WEST;
+        
+        setSize(400, 500);
+        getContentPane().setBackground(generateRandomColor(Color.WHITE));
+        
+        buttonOpen.setFont(new Font("Sans", Font.BOLD, 14));
 
-	/**
-	 * Handle click events on the buttons.
-	 */
-	@Override
-	public void actionPerformed(ActionEvent event) {
-		Object source = event.getSource();
-		if (source instanceof JButton) {
-			JButton button = (JButton) source;
-			if (button == buttonOpen) {
-				openFile();
-			} else if (button == buttonPlay) {
-				if (!isPlaying) {
-					playBack();
-				} else {
-					stopPlaying();
-				}
-			} else if (button == buttonPause) {
-				if (!isPause) {
-					pausePlaying();
-				} else {
-					resumePlaying();
-				}
-			}
-		}
-	}
+        
+        buttonPlay.setFont(new Font("Sans", Font.BOLD, 14));
 
-	private void openFile() {
-		JFileChooser fileChooser = null;
-		
-		if (lastOpenPath != null && !lastOpenPath.equals("")) {
-			fileChooser = new JFileChooser(lastOpenPath);
-		} else {
-			fileChooser = new JFileChooser();
-		}
-		
-		FileFilter wavFilter = new FileFilter() {
-			@Override
-			public String getDescription() {
-				return "Sound file (*.WAV)";
-			}
+        buttonPlay.setEnabled(false);
+        
+        buttonPause.setFont(new Font("Sans", Font.BOLD, 14));
 
-			@Override
-			public boolean accept(File file) {
-				if (file.isDirectory()) {
-					return true;
-				} else {
-					return file.getName().toLowerCase().endsWith(".wav");
-				}
-			}
-		};
+        buttonPause.setEnabled(false);
+        
+        labelTimeCounter.setFont(new Font("Sans", Font.BOLD, 12));
+        labelDuration.setFont(new Font("Sans", Font.BOLD, 12));
+        
+        sliderTime.setPreferredSize(new Dimension(400, 20));
+        sliderTime.setEnabled(false);
+        sliderTime.setValue(0);
 
-		
-		fileChooser.setFileFilter(wavFilter);
-		fileChooser.setDialogTitle("Open Audio File");
-		fileChooser.setAcceptAllFileFilterUsed(false);
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.gridwidth = 3;
+        add(labelFileName, constraints);
+        
+        constraints.anchor = GridBagConstraints.CENTER;
+        constraints.gridy = 1;
+        constraints.gridwidth = 1;
+        add(labelTimeCounter, constraints);
+        
+        constraints.gridx = 1;
+        add(sliderTime, constraints);
+        
+        constraints.gridx = 2;
+        add(labelDuration, constraints);
+        
+        JPanel panelButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 5));
+        panelButtons.add(buttonOpen);
+        panelButtons.add(buttonPlay);
+        panelButtons.add(buttonPause);
+        
+        constraints.gridwidth = 3;
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        add(panelButtons, constraints);
+        
+        buttonOpen.addActionListener(this);
+        buttonPlay.addActionListener(this);
+        buttonPause.addActionListener(this);
+        
+        pack();
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+    }
+    
+    public Color generateRandomColor(Color mix) 
+    {
+        Random random = new Random();
+        int red = random.nextInt(256);
+        int green = random.nextInt(256);
+        int blue = random.nextInt(256);
 
-		int userChoice = fileChooser.showOpenDialog(this);
-		if (userChoice == JFileChooser.APPROVE_OPTION) {
-			audioFilePath = fileChooser.getSelectedFile().getAbsolutePath();
-			lastOpenPath = fileChooser.getSelectedFile().getParent();
-			if (isPlaying || isPause) {
-				stopPlaying();
-				while (player.getAudioClip().isRunning()) {
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException ex) {
-						ex.printStackTrace();
-					}
-				}
-			}
-			playBack();
-		}
-	}
+        // mix the color
+        if (mix != null) {
+            red = (red + mix.getRed()) / 2;
+            green = (green + mix.getGreen()) / 2;
+            blue = (blue + mix.getBlue()) / 2;
+        }
 
-	/**
-	 * Start playing back the sound.
-	 */
-	private void playBack() {
-		timer = new PlayingTimer(labelTimeCounter, sliderTime);
-		timer.start();
-		isPlaying = true;
-		playbackThread = new Thread(new Runnable() {
+        Color color = new Color(red, green, blue);
+        return color;
+    }
 
-			@Override
-			public void run() {
-				try {
+    /**
+     * Handle click events on the buttons.
+     */
+    @Override
+    public void actionPerformed(ActionEvent event) 
+    {
+        Object source = event.getSource();
+        if (source instanceof JButton) {
+            JButton button = (JButton) source;
+            if (button == buttonOpen) {
+                openFile();
+            } else if (button == buttonPlay) {
+                if (!isPlaying) {
+                    playBack();
+                } else {
+                    stopPlaying();
+                }
+            } else if (button == buttonPause) {
+                if (!isPause) {
+                    pausePlaying();
+                } else {
+                    resumePlaying();
+                }
+            }
+        }
+    }
 
-					buttonPlay.setText("Stop");
-					//buttonPlay.setIcon(iconStop);
-					buttonPlay.setEnabled(true);
-					
-					buttonPause.setText("Pause");
-					buttonPause.setEnabled(true);
-					
-					player.load(audioFilePath);
-					timer.setAudioClip(player.getAudioClip());
-					labelFileName.setText("Playing File: " + audioFilePath);
-					sliderTime.setMaximum((int) player.getClipSecondLength());
-					
-					labelDuration.setText(player.getClipLengthString());
-					player.play();
-					
-					resetControls();
+    private void openFile() 
+    {
+        JFileChooser fileChooser = null;
+        
+        if (lastOpenPath != null && !lastOpenPath.equals("")) {
+            fileChooser = new JFileChooser(lastOpenPath);
+        } else {
+            fileChooser = new JFileChooser();
+        }
+        
+        FileFilter wavFilter = new FileFilter() 
+        {
+            @Override
+            public String getDescription() {
+                return "Sound file (*.WAV)";
+            }
 
-				} catch (UnsupportedAudioFileException ex) {
-					JOptionPane.showMessageDialog(SwingAudioPlayer.this,  
-							"The audio format is unsupported!", "Error", JOptionPane.ERROR_MESSAGE);
-					resetControls();
-					ex.printStackTrace();
-				} catch (LineUnavailableException ex) {
-					JOptionPane.showMessageDialog(SwingAudioPlayer.this,  
-							"Could not play the audio file because line is unavailable!", "Error", JOptionPane.ERROR_MESSAGE);
-					resetControls();
-					ex.printStackTrace();
-				} catch (IOException ex) {
-					JOptionPane.showMessageDialog(SwingAudioPlayer.this,  
-							"I/O error while playing the audio file!", "Error", JOptionPane.ERROR_MESSAGE);
-					resetControls();
-					ex.printStackTrace();
-				}
+            @Override
+            public boolean accept(File file) {
+                if (file.isDirectory()) {
+                    return true;
+                } else {
+                    return file.getName().toLowerCase().endsWith(".wav");
+                }
+            }
+        };
 
-			}
-		});
+        fileChooser.setFileFilter(wavFilter);
+        fileChooser.setDialogTitle("Open Audio File");
+        fileChooser.setAcceptAllFileFilterUsed(false);
 
-		playbackThread.start();
-	}
+        int userChoice = fileChooser.showOpenDialog(this);
+        if (userChoice == JFileChooser.APPROVE_OPTION) {
+            audioFilePath = fileChooser.getSelectedFile().getAbsolutePath();
+            lastOpenPath = fileChooser.getSelectedFile().getParent();
+            if (isPlaying || isPause) {
+                stopPlaying();
+                while (player.getAudioClip().isRunning()) {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+            playBack();
+        }
+    }
 
-	private void stopPlaying() {
-		isPause = false;
-		buttonPause.setText("Pause");
-		buttonPause.setEnabled(false);
-		timer.reset();
-		timer.interrupt();
-		player.stop();
-		playbackThread.interrupt();
-	}
-	
-	private void pausePlaying() {
-		buttonPause.setText("Resume");
-		isPause = true;
-		player.pause();
-		timer.pauseTimer();
-		playbackThread.interrupt();
-	}
-	
-	private void resumePlaying() {
-		buttonPause.setText("Pause");
-		isPause = false;
-		player.resume();
-		timer.resumeTimer();
-		playbackThread.interrupt();		
-	}
-	
-	private void resetControls() {
-		timer.reset();
-		timer.interrupt();
+    /**
+     * Start playing back the sound.
+     */
+    private void playBack() 
+    {
+        timer = new PlayingTimer(labelTimeCounter, sliderTime);
+        timer.start();
+        isPlaying = true;
+        playbackThread = new Thread(new Runnable() 
+        {
+            @Override
+            public void run() 
+            {
+                try {
 
-		buttonPlay.setText("Play");
-		//buttonPlay.setIcon(iconPlay);
-		
-		buttonPause.setEnabled(false);
-		
-		isPlaying = false;		
-	}
-	
-	/**
-	 * Launch the program
-	 */
-	public static void main(String[] args) {
-		
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		
-		SwingUtilities.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				new SwingAudioPlayer().setVisible(true);
-			}
-		});
-	}
+                    buttonPlay.setText("Stop");
+                    
+                    buttonPlay.setEnabled(true);
+                    
+                    buttonPause.setText("Pause");
+                    buttonPause.setEnabled(true);
+                    
+                    player.load(audioFilePath);
+                    timer.setAudioClip(player.getAudioClip());
+                    labelFileName.setText("Playing File: " + audioFilePath);
+                    sliderTime.setMaximum((int) player.getClipSecondLength());
+                    
+                    labelDuration.setText(player.getClipLengthString());
+                    player.play();
+                    
+                    resetControls();
+
+                } catch (UnsupportedAudioFileException ex) {
+                    JOptionPane.showMessageDialog(SwingAudioPlayer.this,  
+                            "The audio format is unsupported!", "Error", JOptionPane.ERROR_MESSAGE);
+                    resetControls();
+                    ex.printStackTrace();
+                } catch (LineUnavailableException ex) {
+                    JOptionPane.showMessageDialog(SwingAudioPlayer.this,  
+                            "Could not play the audio file because line is unavailable!", "Error", JOptionPane.ERROR_MESSAGE);
+                    resetControls();
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(SwingAudioPlayer.this,  
+                            "I/O error while playing the audio file!", "Error", JOptionPane.ERROR_MESSAGE);
+                    resetControls();
+                    ex.printStackTrace();
+                }
+
+            }
+        });
+
+        playbackThread.start();
+    }
+
+    private void stopPlaying() 
+    {
+        isPause = false;
+        buttonPause.setText("Pause");
+        buttonPause.setEnabled(false);
+        timer.reset();
+        timer.interrupt();
+        player.stop();
+        playbackThread.interrupt();
+    }
+    
+    private void pausePlaying() 
+    {
+        buttonPause.setText("Resume");
+        isPause = true;
+        player.pause();
+        timer.pauseTimer();
+        playbackThread.interrupt();
+    }
+    
+    private void resumePlaying() 
+    {
+        buttonPause.setText("Pause");
+        isPause = false;
+        player.resume();
+        timer.resumeTimer();
+        playbackThread.interrupt();     
+    }
+    
+    private void resetControls() 
+    {
+        timer.reset();
+        timer.interrupt();
+
+        buttonPlay.setText("Play");
+
+        
+        buttonPause.setEnabled(false);
+        
+        isPlaying = false;      
+    }
+    
+    /**
+     * Launch the program
+     */
+    public static void main(String[] args) 
+    {
+        
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        SwingUtilities.invokeLater(new Runnable() 
+        {
+            @Override
+            public void run() {
+                new SwingAudioPlayer().setVisible(true);
+            }
+        });
+    }
 
 
 }

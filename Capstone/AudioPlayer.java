@@ -1,5 +1,3 @@
- 
-
 import java.io.File;
 import java.io.IOException;
 
@@ -18,7 +16,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * @author www.codejava.net
  *
  */
-public class AudioPlayer implements LineListener {
+public class AudioPlayer implements LineListener 
+{
 	private static final int SECONDS_IN_HOUR = 60 * 60;
 	private static final int SECONDS_IN_MINUTE = 60;
 	
@@ -64,11 +63,13 @@ public class AudioPlayer implements LineListener {
 		audioClip.open(audioStream);
 	}
 	
-	public long getClipSecondLength() {
+	public long getClipSecondLength() 
+	{
 		return audioClip.getMicrosecondLength() / 1_000_000;
 	}
 	
-	public String getClipLengthString() {
+	public String getClipLengthString() 
+	{
 		String length = "";
 		long hour = 0;
 		long minute = 0;
@@ -107,8 +108,8 @@ public class AudioPlayer implements LineListener {
 	 * @throws UnsupportedAudioFileException
 	 * @throws LineUnavailableException
 	 */
-	void play() throws IOException {
-
+	void play() throws IOException 
+	{
 		audioClip.start();
 
 		playCompleted = false;
@@ -140,15 +141,18 @@ public class AudioPlayer implements LineListener {
 	/**
 	 * Stop playing back.
 	 */
-	public void stop() {
+	public void stop() 
+	{
 		isStopped = true;
 	}
 
-	public void pause() {
+	public void pause() 
+	{
 		isPaused = true;
 	}
 
-	public void resume() {
+	public void resume() 
+	{
 		isPaused = false;
 	}
 
@@ -156,7 +160,8 @@ public class AudioPlayer implements LineListener {
 	 * Listens to the audio line events to know when the playback completes.
 	 */
 	@Override
-	public void update(LineEvent event) {
+	public void update(LineEvent event) 
+	{
 		LineEvent.Type type = event.getType();
 		if (type == LineEvent.Type.STOP) {
 			System.out.println("STOP EVENT");
@@ -166,7 +171,8 @@ public class AudioPlayer implements LineListener {
 		}
 	}
 	
-	public Clip getAudioClip() {
+	public Clip getAudioClip() 
+	{
 		return audioClip;
 	}	
 }

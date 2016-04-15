@@ -1,5 +1,3 @@
- 
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -64,8 +62,7 @@ public class PlayingTimer extends Thread {
 			}
 		}
 	}
-	
-	
+		
 	/**
 	 * Reset counting to "00:00:00"
 	 */
