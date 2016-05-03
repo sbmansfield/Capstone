@@ -75,7 +75,7 @@ public class AudioPlayer implements LineListener
 		long minute = 0;
 		long seconds = audioClip.getMicrosecondLength() / 1_000_000;
 		
-		System.out.println(seconds);
+		//System.out.println(seconds);
 		
 		if (seconds >= SECONDS_IN_HOUR) {
 			hour = seconds / SECONDS_IN_HOUR;
@@ -128,7 +128,7 @@ public class AudioPlayer implements LineListener
 				if (isPaused) {
 					audioClip.stop();
 				} else {
-					System.out.println("!!!!");
+					//System.out.println("!!!!");
 					audioClip.start();
 				}
 			}
@@ -164,7 +164,7 @@ public class AudioPlayer implements LineListener
 	{
 		LineEvent.Type type = event.getType();
 		if (type == LineEvent.Type.STOP) {
-			System.out.println("STOP EVENT");
+			//System.out.println("STOP EVENT");
 			if (isStopped || !isPaused) {
 				playCompleted = true;
 			}

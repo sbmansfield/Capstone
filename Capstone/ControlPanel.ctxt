@@ -1,5 +1,0 @@
-#BlueJ class context
-comment0.params=canv
-comment0.target=ControlPanel(DrawingPanel)
-comment0.text=\r\n\ Constructor\ for\ class\ ControlPanel\r\n\r\n\ @param\ \ canv\ \ \ a\ DrawingPanel\ object\r\n
-numComments=1

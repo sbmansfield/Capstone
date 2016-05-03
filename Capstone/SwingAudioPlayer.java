@@ -25,6 +25,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileFilter;
 
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.DefaultListModel;
+
 /**
  * A Swing-based audio player program.
  * NOTE: Can play only WAVE (*.wav) file.
@@ -63,10 +67,12 @@ public class SwingAudioPlayer extends JFrame implements ActionListener {
         constraints.anchor = GridBagConstraints.WEST;
         
         setSize(400, 500);
-        getContentPane().setBackground(generateRandomColor(Color.WHITE));
         
-        buttonOpen.setFont(new Font("Sans", Font.BOLD, 14));
+        Color bgColor = generateRandomColor(Color.WHITE);
+        getContentPane().setBackground(bgColor);
+        sliderTime.setBackground(bgColor);
 
+        buttonOpen.setFont(new Font("Sans", Font.BOLD, 14));
         
         buttonPlay.setFont(new Font("Sans", Font.BOLD, 14));
 
@@ -103,11 +109,17 @@ public class SwingAudioPlayer extends JFrame implements ActionListener {
         panelButtons.add(buttonOpen);
         panelButtons.add(buttonPlay);
         panelButtons.add(buttonPause);
+        panelButtons.setBackground(bgColor);
         
         constraints.gridwidth = 3;
         constraints.gridx = 0;
         constraints.gridy = 2;
         add(panelButtons, constraints);
+        
+        //String[] stringArray = {"ex1", "ex2"};
+        //JList list = new JList(stringArray);
+        //JScrollPane scrollableList = new JScrollPane(list);
+        //add(scrollableList);
         
         buttonOpen.addActionListener(this);
         buttonPlay.addActionListener(this);
