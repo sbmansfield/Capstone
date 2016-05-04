@@ -75,11 +75,9 @@ public class SwingAudioPlayer extends JFrame implements ActionListener {
         buttonOpen.setFont(new Font("Sans", Font.BOLD, 14));
         
         buttonPlay.setFont(new Font("Sans", Font.BOLD, 14));
-
         buttonPlay.setEnabled(false);
         
         buttonPause.setFont(new Font("Sans", Font.BOLD, 14));
-
         buttonPause.setEnabled(false);
         
         labelTimeCounter.setFont(new Font("Sans", Font.BOLD, 12));
