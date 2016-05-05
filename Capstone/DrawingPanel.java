@@ -15,7 +15,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-import java.lang.Boolean;
+import java.awt.Component;
+import java.awt.TextField;
 
 public class DrawingPanel extends JPanel
 {
@@ -86,19 +87,11 @@ public class DrawingPanel extends JPanel
         }
     }
     
-    public void pickOption()
+    public void customizeFractal()
     {
-//         Object[] possibilities = {"ham", "spam", "yam"};
-//         String s = (String)JOptionPane.showInputDialog(
-//                             frame,
-//                             "testing:",
-//                             "Customized Dialog",
-//                             JOptionPane.PLAIN_MESSAGE,
-//                             icon,
-//                             possibilities,
-//                             "ham");
+        MenuLookDemo menu = new MenuLookDemo();
+        menu.setVisible(true);
     }
-    
     
     /**
      * Draws all the shapes in the list

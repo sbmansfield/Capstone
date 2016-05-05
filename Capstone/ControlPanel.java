@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import java.awt.Color;
 
+
 public class ControlPanel extends JPanel
 {
     //color panel for JColorChooser
@@ -34,8 +35,11 @@ public class ControlPanel extends JPanel
         colorPanel.setBackground(Color.BLACK);
         add(colorPanel);
         
-        fractalButton = new JButton("Add Fractal");
+        fractalButton = new JButton("Customize Fractal");
         add(fractalButton);
+        
+        //tf1 = new TextField();
+        //add(tf1);
         
         //button3 = new JButton("Add Square");
         //add(button3);
@@ -43,6 +47,7 @@ public class ControlPanel extends JPanel
         ClickListener listener = new ClickListener();
         button.addActionListener(listener);
         fractalButton.addActionListener(listener);
+        //tf1.addActionListener(listener);
         
         setVisible(true);
     }
@@ -59,7 +64,8 @@ public class ControlPanel extends JPanel
             }
             else if (event.getSource() == fractalButton)
             {
-               
+                canvas.customizeFractal();
+                
             }
             else
             {

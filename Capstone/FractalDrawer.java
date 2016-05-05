@@ -8,7 +8,7 @@ public class FractalDrawer extends JFrame
      */
     public FractalDrawer()
     {
-        setTitle("Drawing Editor");
+        setTitle("Fractal Drawer");
         setSize(800, 800);   
         
         DrawingPanel canvas = new DrawingPanel();
