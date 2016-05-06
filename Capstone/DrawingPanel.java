@@ -89,8 +89,7 @@ public class DrawingPanel extends JPanel
     
     public void customizeFractal()
     {
-        MenuLookDemo menu = new MenuLookDemo();
-        menu.setVisible(true);
+        Customizer frame = new Customizer();
     }
     
     /**
