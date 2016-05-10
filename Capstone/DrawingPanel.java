@@ -17,6 +17,7 @@ import java.awt.event.MouseMotionListener;
 
 import java.awt.Component;
 import java.awt.TextField;
+import javax.swing.JFrame;
 
 public class DrawingPanel extends JPanel
 {
@@ -29,7 +30,6 @@ public class DrawingPanel extends JPanel
     //keeps track of whether the active shape is selected or not in order to fill/outline
     private boolean isSelected;
     
-    private TreeComponent drawing;
     
     /**
      * Constructor for class DrawingPanel
@@ -40,10 +40,10 @@ public class DrawingPanel extends JPanel
         addMouseMotionListener( new MouseDragListener() );
         
         setBackground(Color.BLACK);
-        initialColor = Color.WHITE;
+        initialColor = Color.BLUE;
         
-        drawing = new TreeComponent(1);
-        add(drawing);
+        //drawing = new TreeComponent(1);
+        //add(drawing);
         
         isSelected = false;
     }
@@ -85,11 +85,6 @@ public class DrawingPanel extends JPanel
         {
             initialColor = initColor;
         }
-    }
-    
-    public void customizeFractal()
-    {
-        Customizer frame = new Customizer();
     }
     
     /**

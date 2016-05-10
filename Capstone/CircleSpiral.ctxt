@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=x\ y\ rad\ recursions\ color
+comment0.target=CircleSpiral(double,\ double,\ double,\ int,\ java.awt.Color)
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ CircleSpiral\r\n
+comment1.params=g2
+comment1.target=void\ draw(java.awt.Graphics2D)
+comment1.text=\r\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\r\n\ \r\n\ @param\ \ g2\ \ \ Graphics2D\ object\r\n
+numComments=2

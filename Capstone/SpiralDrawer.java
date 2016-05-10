@@ -1,12 +1,12 @@
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
-public class FractalDrawer extends JFrame
+public class SpiralDrawer extends JFrame
 {
     /**
-     * Constructor for class DrawingEditor
+     * Constructor for class SpiralDrawer
      */
-    public FractalDrawer()
+    public SpiralDrawer()
     {
         setTitle("Fractal Drawer");
         setSize(800, 800);   
@@ -22,10 +22,10 @@ public class FractalDrawer extends JFrame
     }
     
     /**
-     * Creates a new DrawingEditor object which opens a window on the screen 
+     * Creates a new SpiralDrawer object which opens a window on the screen 
      */
     public static void main(String[] args)
     {
-        FractalDrawer frame = new FractalDrawer();
+        SpiralDrawer frame = new SpiralDrawer();
     }
 }

@@ -32,10 +32,10 @@ public class ControlPanel extends JPanel
         add(button);
         
         colorPanel = new JPanel();
-        colorPanel.setBackground(Color.BLACK);
+        colorPanel.setBackground(Color.BLUE);
         add(colorPanel);
         
-        fractalButton = new JButton("Customize Fractal");
+        fractalButton = new JButton("Customize Spiral");
         add(fractalButton);
         
         //tf1 = new TextField();
@@ -64,13 +64,11 @@ public class ControlPanel extends JPanel
             }
             else if (event.getSource() == fractalButton)
             {
-                canvas.customizeFractal();
-                
+                Customizer customize = new Customizer(canvas);
             }
             else
             {
-                //add square button
-                //canvas.addSquare();
+                
             }
         }
     }
