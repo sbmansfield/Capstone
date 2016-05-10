@@ -27,6 +27,7 @@ public class Customizer extends JPanel
     private JTextField tf3;
     private JTextField tf4;
     
+    
     public Customizer(DrawingPanel canv)
     {
         canvas = canv;
@@ -128,4 +129,5 @@ public class Customizer extends JPanel
             }
         }
     }
+
 }

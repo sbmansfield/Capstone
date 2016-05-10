@@ -30,6 +30,7 @@ public class DrawingPanel extends JPanel
     //keeps track of whether the active shape is selected or not in order to fill/outline
     private boolean isSelected;
     
+    private CircleSpiral drawing;
     
     /**
      * Constructor for class DrawingPanel
@@ -41,9 +42,6 @@ public class DrawingPanel extends JPanel
         
         setBackground(Color.BLACK);
         initialColor = Color.BLUE;
-        
-        //drawing = new TreeComponent(1);
-        //add(drawing);
         
         isSelected = false;
     }
