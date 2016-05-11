@@ -34,6 +34,8 @@ public class CircleSpiral extends JPanel
         radius = rad;
         numRecursions = recursions;
         circleColor = color;
+        
+        setBackground(Color.black);
     }
     
     //-----------------------------------------------------------------
@@ -59,6 +61,8 @@ public class CircleSpiral extends JPanel
             
             drawSpiral(x, y, radius, g2);
         }
+        
+        repaint();
     }
 
     //-----------------------------------------------------------------
@@ -66,6 +70,7 @@ public class CircleSpiral extends JPanel
     //-----------------------------------------------------------------
     public void paintComponent(Graphics2D g2)
     {
+        super.paintComponent(g2);
         g2.setPaint(circleColor);
         drawSpiral(xCoord, yCoord, radius, g2);
     }

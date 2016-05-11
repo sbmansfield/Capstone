@@ -1,6 +1,14 @@
 #BlueJ class context
-comment0.params=canv
-comment0.target=Customizer(DrawingPanel)
+comment0.params=
+comment0.target=Customizer()
 comment1.params=x\ y
 comment1.target=java.awt.GridBagConstraints\ createGbc(int,\ int)
-numComments=2
+comment2.params=
+comment2.target=double\ getXCoord()
+comment3.params=
+comment3.target=double\ getYCoord()
+comment4.params=
+comment4.target=double\ getRadius()
+comment5.params=
+comment5.target=int\ getNumRecursions()
+numComments=6

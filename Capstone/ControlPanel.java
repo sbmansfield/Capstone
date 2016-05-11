@@ -14,9 +14,10 @@ public class ControlPanel extends JPanel
     private JPanel colorPanel;
     //pick color button
     private JButton button;
-    //add fractal button
-    private JButton fractalButton;
-   
+    //customize button
+    private JButton customize;
+    //button to initiate drawing
+    private JButton draw;
     //canvas for the drawing panel
     private DrawingPanel canvas;
     
@@ -35,19 +36,16 @@ public class ControlPanel extends JPanel
         colorPanel.setBackground(Color.BLUE);
         add(colorPanel);
         
-        fractalButton = new JButton("Customize Spiral");
-        add(fractalButton);
-        
-        //tf1 = new TextField();
-        //add(tf1);
-        
-        //button3 = new JButton("Add Square");
-        //add(button3);
+        customize = new JButton("Customize Spiral");
+        add(customize);
+
+        draw = new JButton("Draw");
+        add(draw);
         
         ClickListener listener = new ClickListener();
         button.addActionListener(listener);
-        fractalButton.addActionListener(listener);
-        //tf1.addActionListener(listener);
+        customize.addActionListener(listener);
+        draw.addActionListener(listener);
         
         setVisible(true);
     }
@@ -62,14 +60,17 @@ public class ControlPanel extends JPanel
                 canvas.pickColor();
                 colorPanel.setBackground( canvas.getColor() );
             }
-            else if (event.getSource() == fractalButton)
+            else if (event.getSource() == customize)
             {
-                Customizer customize = new Customizer(canvas);
+                canvas.addCustomizer();
+                //Customizer customize = new Customizer(canvas);
             }
             else
             {
-                
+                canvas.addDrawing();
+                repaint();
             }
         }
     }
+    
 }

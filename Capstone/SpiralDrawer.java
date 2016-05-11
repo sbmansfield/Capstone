@@ -8,10 +8,10 @@ public class SpiralDrawer extends JFrame
      */
     public SpiralDrawer()
     {
-        setTitle("Fractal Drawer");
+        setTitle("Spiral Drawer");
         setSize(800, 800);   
         
-        DrawingPanel canvas = new DrawingPanel();
+        DrawingPanel canvas = new DrawingPanel(this);
         add(canvas, BorderLayout.CENTER);
         
         ControlPanel controls = new ControlPanel(canvas);

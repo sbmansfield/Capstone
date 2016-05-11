@@ -27,10 +27,14 @@ public class Customizer extends JPanel
     private JTextField tf3;
     private JTextField tf4;
     
+    private double xCoordinate;
+    private double yCoordinate;
+    private double radius;
+    private int numRecursions;
     
-    public Customizer(DrawingPanel canv)
+    public Customizer()
     {
-        canvas = canv;
+        //canvas = canv;
         
         frame = new JFrame("Customization Settings");
         frame.setSize(400, 300);
@@ -57,6 +61,8 @@ public class Customizer extends JPanel
         input.add(new JLabel("Number of Recursions"), createGbc(0, 3));
         tf4 = new JTextField(COLS);
         input.add(tf4, createGbc(1, 3));
+        
+        //////
         
         //////
 
@@ -99,6 +105,26 @@ public class Customizer extends JPanel
         }
         return gbc;
     }
+    
+    public double getXCoord()
+    {
+        return xCoordinate;
+    }
+    
+    public double getYCoord()
+    {
+        return yCoordinate;
+    }
+    
+    public double getRadius()
+    {
+        return radius;
+    }
+    
+    public int getNumRecursions()
+    {
+        return numRecursions;
+    }
 
     public class ClickListener implements ActionListener
     {
@@ -107,19 +133,19 @@ public class Customizer extends JPanel
             if (event.getSource() == submit)
             {
                 String tf1Text = tf1.getText();
-                double xCoordinate = Double.parseDouble(tf1Text);
+                xCoordinate = Double.parseDouble(tf1Text);
                 
                 String tf2Text = tf2.getText();
-                double yCoordinate = Double.parseDouble(tf2Text);
+                yCoordinate = Double.parseDouble(tf2Text);
                 
                 String tf3Text = tf3.getText();
-                double radius = Double.parseDouble(tf3Text);
+                radius = Double.parseDouble(tf3Text);
                 
                 String tf4Text = tf4.getText();
-                int numRecursions = Integer.parseInt(tf4Text);
+                numRecursions = Integer.parseInt(tf4Text);
                 
-                CircleSpiral newCircle = new CircleSpiral(xCoordinate, yCoordinate, 
-                radius, numRecursions, canvas.getColor());
+                //CircleSpiral newCircle = new CircleSpiral(xCoordinate, yCoordinate, 
+                //radius, numRecursions, canvas.getColor());
                 
                 frame.dispose();
             }

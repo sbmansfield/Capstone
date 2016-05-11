@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=
-comment0.target=DrawingPanel()
+comment0.params=frame
+comment0.target=DrawingPanel(SpiralDrawer)
 comment0.text=\r\n\ Constructor\ for\ class\ DrawingPanel\r\n
 comment1.params=
 comment1.target=java.awt.Color\ getColor()
@@ -11,7 +11,13 @@ comment2.text=\r\n\ Overrides\ JComponent\u2019s\ getPreferredSize\ method\ to\ 
 comment3.params=
 comment3.target=void\ pickColor()
 comment3.text=\r\n\ Called\ from\ ControlPanel\ when\ the\ \u201CPick\ Color\u201D\ button\ is\ clicked.\ \r\n\ Brings\ up\ a\ JColorChooser\ and\ sets\ the\ chosen\ color\ as\ the\ new\ drawing\ color.\ \r\n\ Leaves\ the\ drawing\ color\ unchanged\ if\ the\ user\ clicks\ \u201CCancel.\u201D\r\n\r\n
-comment4.params=g
-comment4.target=void\ paintComponent(java.awt.Graphics)
-comment4.text=\r\n\ Draws\ all\ the\ shapes\ in\ the\ list\r\n\r\n\ @param\ \ g\ \ \ Graphics\ object\r\n
-numComments=5
+comment4.params=
+comment4.target=void\ addCustomizer()
+comment5.params=
+comment5.target=void\ addDrawing()
+comment6.params=x\ y\ radius\ g2
+comment6.target=void\ drawSpiral(double,\ double,\ double,\ java.awt.Graphics2D)
+comment7.params=g
+comment7.target=void\ paintComponent(java.awt.Graphics)
+comment7.text=\r\n\ Draws\ all\ the\ shapes\ in\ the\ list\r\n\r\n\ @param\ \ g\ \ \ Graphics\ object\r\n
+numComments=8
