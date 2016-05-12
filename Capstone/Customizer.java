@@ -15,7 +15,6 @@ public class Customizer extends JPanel
 {
     public static final int COLS = 8;
     
-    private DrawingPanel canvas;
     private JFrame frame;
     private JButton submit;
     private JButton cancel;
@@ -27,15 +26,16 @@ public class Customizer extends JPanel
     private JTextField tf3;
     private JTextField tf4;
     
-    private double xCoordinate;
-    private double yCoordinate;
+    private int xCoordinate;
+    private int yCoordinate;
     private double radius;
     private int numRecursions;
     
+    /**
+     * Constructor for objects of class Customizer
+     */
     public Customizer()
     {
-        //canvas = canv;
-        
         frame = new JFrame("Customization Settings");
         frame.setSize(400, 300);
         frame.setResizable(false);
@@ -85,6 +85,12 @@ public class Customizer extends JPanel
         frame.setVisible(true);
     }
 
+    /**
+     * Creates constraints for the layout of the window
+     *
+     * @param  x   column
+     * @param  y   row
+     */
     public static GridBagConstraints createGbc(int x, int y) 
     {
         GridBagConstraints gbc = new GridBagConstraints();
@@ -106,21 +112,41 @@ public class Customizer extends JPanel
         return gbc;
     }
     
-    public double getXCoord()
+    /**
+     * Returns x coordinate
+     *
+     * @return     x coordinate
+     */
+    public int getXCoord()
     {
         return xCoordinate;
     }
     
-    public double getYCoord()
+    /**
+     * Returns y coordinate
+     *
+     * @return     y coordinate
+     */
+    public int getYCoord()
     {
         return yCoordinate;
     }
     
+    /**
+     * Returns radius
+     *
+     * @return     radius
+     */
     public double getRadius()
     {
         return radius;
     }
     
+    /**
+     * Returns the number of recursions
+     *
+     * @return     number of recursions
+     */
     public int getNumRecursions()
     {
         return numRecursions;
@@ -133,19 +159,16 @@ public class Customizer extends JPanel
             if (event.getSource() == submit)
             {
                 String tf1Text = tf1.getText();
-                xCoordinate = Double.parseDouble(tf1Text);
+                xCoordinate = Integer.parseInt(tf1Text);
                 
                 String tf2Text = tf2.getText();
-                yCoordinate = Double.parseDouble(tf2Text);
+                yCoordinate = Integer.parseInt(tf2Text);
                 
                 String tf3Text = tf3.getText();
                 radius = Double.parseDouble(tf3Text);
                 
                 String tf4Text = tf4.getText();
                 numRecursions = Integer.parseInt(tf4Text);
-                
-                //CircleSpiral newCircle = new CircleSpiral(xCoordinate, yCoordinate, 
-                //radius, numRecursions, canvas.getColor());
                 
                 frame.dispose();
             }

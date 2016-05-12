@@ -1,9 +1,10 @@
 #BlueJ class context
 comment0.params=x\ y\ rad\ recursions\ color
-comment0.target=CircleSpiral(double,\ double,\ double,\ int,\ java.awt.Color)
+comment0.target=CircleSpiral(int,\ int,\ double,\ int,\ java.awt.Color)
 comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ CircleSpiral\r\n
-comment1.params=x\ y\ radius\ g2
-comment1.target=void\ drawSpiral(double,\ double,\ double,\ java.awt.Graphics2D)
+comment1.params=x\ y\ radius\ g2\ step
+comment1.target=void\ drawSpiral(int,\ int,\ double,\ java.awt.Graphics2D,\ int)
+comment1.text=\r\n\ Draws\ the\ spiral\ recursively\r\n\r\n\ @param\ \ x\ \ \ x\ coordinate\r\n\ @param\ \ y\ \ \ y\ coordinate\r\n\ @param\ \ radius\ \ \ radius\ of\ the\ circle\r\n\ @param\ \ g2\ \ \ Graphics2D\ object\r\n\ @param\ \ step\ \ \ step\ size\ to\ determine\ recursion\r\n
 comment2.params=g2
 comment2.target=void\ paintComponent(java.awt.Graphics2D)
 numComments=3

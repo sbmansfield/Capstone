@@ -22,28 +22,21 @@ import javax.swing.JFrame;
 public class DrawingPanel extends JPanel
 {
     //color of the drawing panel using JColorChooser
-    private Color initialColor;
+    private Color color;
 
-    private CircleSpiral drawing;
     private Customizer customize;
-    private SpiralDrawer mainFrame;
-    
-    private static final double resizeCircle = 0.8;
-    private static final double xFactor = 0.9;
-    private static final double yFactor = 0.7;
-    
-    private int count = 1;
-    private int numRecursions;
+
+    public boolean doDraw = false;
     
     /**
      * Constructor for class DrawingPanel
      */
-    public DrawingPanel(SpiralDrawer frame)
+    public DrawingPanel()
     {
         setBackground(Color.BLACK);
-        initialColor = Color.BLUE;
+        color = Color.BLUE;
         
-        mainFrame = frame;
+        //mainFrame = frame;
     }
 
     /**
@@ -53,7 +46,7 @@ public class DrawingPanel extends JPanel
      */
     public Color getColor()
     {
-        return initialColor;
+        return color;
     }
     
     /**
@@ -75,69 +68,26 @@ public class DrawingPanel extends JPanel
      */
     public void pickColor()
     {
-        Color initColor = JColorChooser.showDialog(this, "Color Chooser", initialColor);
+        Color newColor = JColorChooser.showDialog(this, "Color Chooser", color);
         
         //this code makes sure that when 'cancel' is clicked the panel will 
         //retain the previous color
-        if (initColor != null)
+        if (newColor != null)
         {
-            initialColor = initColor;
-        }
-    }
-    
-    public void addCustomizer()
-    {
-        customize = new Customizer();
-    }
-    
-    public void addDrawing()
-    {
-        System.out.print("hi");
-        double x = customize.getXCoord();
-        double y = customize.getYCoord();
-        double radius = customize.getRadius();
-        numRecursions = customize.getNumRecursions();
-        
-        //drawing = new CircleSpiral(x, y, radius, numRecursions, initialColor);
-        //add(drawing);
-        //revalidate();
-        //repaint();
-        //mainFrame.add(drawing);
-        //SwingUtilities.updateComponentTreeUI(mainFrame);
-        // mainFrame.invalidate();
-        //mainFrame.revalidate();
-        //mainFrame.repaint();
-        //mainFrame.setVisible(false);
-        //mainFrame.setVisible(true);
-        
-        drawSpiral(x, y, radius, (Graphics2D)getGraphics());
-    }
-    
-    public void drawSpiral(double x, double y, double radius, Graphics2D g2)
-    {
-        g2.setPaint(initialColor);
-        
-        if (count == 1)
-        {
-            Ellipse2D.Double newCircle = new Ellipse2D.Double(x, y, 2*radius, 2*radius);
-            g2.fill(newCircle);
-        }
-        else if (count <= numRecursions)
-        {
-            radius *= resizeCircle;
-            x *= xFactor;
-            y *= yFactor;
-            count++;
-            
-            Ellipse2D.Double newCircle = new Ellipse2D.Double(x, y, 2*radius, 2*radius);
-            g2.fill(newCircle);
-            
-            drawSpiral(x, y, radius, g2);
+            color = newColor;
         }
     }
     
     /**
-     * Draws all the shapes in the list
+     * Adds a new Customizer window after the Customize button is pressed
+     */
+    public void addCustomizer()
+    {
+        Customizer customize = new Customizer();
+    }
+    
+    /**
+     * Draws the circle spiral
      *
      * @param  g   Graphics object
      */
@@ -146,7 +96,19 @@ public class DrawingPanel extends JPanel
         // this code is invoked initially and each time we call repaint
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-
+        
+        if (doDraw)
+        {
+            //begins drawing the CircleSpiral object
+            g2.setPaint(color);
+            int x = customize.getXCoord();
+            int y = customize.getYCoord();
+            double radius = customize.getRadius();
+            int numRecursions = customize.getNumRecursions();
+            CircleSpiral drawing = new CircleSpiral(x, y, radius, numRecursions, color);
+            drawing.drawSpiral(x, y, radius, g2, numRecursions);
+            doDraw = false;
+        }
     }
     
 

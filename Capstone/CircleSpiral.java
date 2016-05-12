@@ -3,31 +3,28 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Ellipse2D.Double;
+import java.awt.Point;
 
-/**
- * Write a description of class CircleSpiral here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+import java.lang.Math;
+
 public class CircleSpiral extends JPanel
 {
-    private double xCoord;
-    private double yCoord;
+    private int xCoord;
+    private int yCoord;
     private double radius;
     private int numRecursions;
     private Color circleColor;
     
-    private static final double resizeCircle = 0.8;
-    private static final double xFactor = 0.9;
-    private static final double yFactor = 0.7;
+    // scaling factor for each subsequent circle
+    private static final double SCALING_FACTOR = 0.9;
     
-    private int count = 1;
+    // Number of radians to rotate each rectangle
+    private static final double ROTATION_INCREMENT = Math.PI/24;
 
     /**
      * Constructor for objects of class CircleSpiral
      */
-    public CircleSpiral(double x, double y, double rad, int recursions, Color color)
+    public CircleSpiral(int x, int y, double rad, int recursions, Color color)
     {
         xCoord = x;
         yCoord = y;
@@ -38,31 +35,36 @@ public class CircleSpiral extends JPanel
         setBackground(Color.black);
     }
     
-    //-----------------------------------------------------------------
-    //  Draws the spiral recursively
-    //-----------------------------------------------------------------
-    public void drawSpiral(double x, double y, double radius, Graphics2D g2)
+    /**
+     * Draws the spiral recursively
+     *
+     * @param  x   x coordinate
+     * @param  y   y coordinate
+     * @param  radius   radius of the circle
+     * @param  g2   Graphics2D object
+     * @param  step   step size to determine recursion
+     */
+    public void drawSpiral(int x, int y, double radius, Graphics2D g2, int step)
     {
         
-        if (count == 1)
+        if (step == 0)
+        {
+            return;
+        }
+        else
         {
             Ellipse2D.Double newCircle = new Ellipse2D.Double(x, y, 2*radius, 2*radius);
-            g2.fill(newCircle);
-        }
-        else if (count <= numRecursions)
-        {
-            radius *= resizeCircle;
-            x *= xFactor;
-            y *= yFactor;
-            count++;
             
-            Ellipse2D.Double newCircle = new Ellipse2D.Double(x, y, 2*radius, 2*radius);
+            g2.setPaint(circleColor);
             g2.fill(newCircle);
             
-            drawSpiral(x, y, radius, g2);
+            circleColor = circleColor.brighter();
+            radius *= SCALING_FACTOR;
+            g2.rotate(ROTATION_INCREMENT);
+
+            drawSpiral(x, y, radius, g2, step - 1);
         }
-        
-        repaint();
+
     }
 
     //-----------------------------------------------------------------
@@ -71,8 +73,9 @@ public class CircleSpiral extends JPanel
     public void paintComponent(Graphics2D g2)
     {
         super.paintComponent(g2);
-        g2.setPaint(circleColor);
-        drawSpiral(xCoord, yCoord, radius, g2);
+        //g2.setPaint(circleColor);
+
+        drawSpiral(xCoord, yCoord, radius, g2, numRecursions);
     }
 
 }

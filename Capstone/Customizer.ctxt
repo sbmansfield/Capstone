@@ -1,14 +1,20 @@
 #BlueJ class context
 comment0.params=
 comment0.target=Customizer()
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ Customizer\r\n
 comment1.params=x\ y
 comment1.target=java.awt.GridBagConstraints\ createGbc(int,\ int)
+comment1.text=\r\n\ Creates\ constraints\ for\ the\ layout\ of\ the\ window\r\n\r\n\ @param\ \ x\ \ \ column\r\n\ @param\ \ y\ \ \ row\r\n
 comment2.params=
-comment2.target=double\ getXCoord()
+comment2.target=int\ getXCoord()
+comment2.text=\r\n\ Returns\ x\ coordinate\r\n\r\n\ @return\ \ \ \ \ x\ coordinate\r\n
 comment3.params=
-comment3.target=double\ getYCoord()
+comment3.target=int\ getYCoord()
+comment3.text=\r\n\ Returns\ y\ coordinate\r\n\r\n\ @return\ \ \ \ \ y\ coordinate\r\n
 comment4.params=
 comment4.target=double\ getRadius()
+comment4.text=\r\n\ Returns\ radius\r\n\r\n\ @return\ \ \ \ \ radius\r\n
 comment5.params=
 comment5.target=int\ getNumRecursions()
+comment5.text=\r\n\ Returns\ the\ number\ of\ recursions\r\n\r\n\ @return\ \ \ \ \ number\ of\ recursions\r\n
 numComments=6

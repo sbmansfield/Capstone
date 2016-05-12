@@ -63,12 +63,12 @@ public class ControlPanel extends JPanel
             else if (event.getSource() == customize)
             {
                 canvas.addCustomizer();
-                //Customizer customize = new Customizer(canvas);
             }
             else
             {
-                canvas.addDrawing();
-                repaint();
+                //canvas.addDrawing();
+                canvas.doDraw = true;
+                canvas.repaint();
             }
         }
     }
